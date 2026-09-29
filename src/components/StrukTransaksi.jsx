@@ -11,18 +11,10 @@ export default function StrukTransaksi({ transaksi }) {
   };
 
   const getMetodeBadge = (metode) => {
-    switch (metode) {
-      case 'Tunai':
-        return 'bg-emerald-100 text-emerald-800 border-emerald-200';
-      case 'GoPay':
-        return 'bg-sky-100 text-[#00AED6] border-sky-200';
-      case 'ShopeePay':
-        return 'bg-orange-100 text-[#EE4D2D] border-orange-200';
-      case 'DANA':
-        return 'bg-blue-100 text-[#118EEA] border-blue-200';
-      default:
-        return 'bg-slate-100 text-slate-700 border-slate-200';
+    if (metode === 'Tunai') {
+      return 'bg-emerald-100 text-emerald-800 border-emerald-200';
     }
+    return 'bg-slate-100 text-slate-700 border-slate-200';
   };
 
   return (

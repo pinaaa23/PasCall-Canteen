@@ -1,48 +1,21 @@
 import React from 'react';
-import { Banknote, Wallet, Check, AlertCircle } from 'lucide-react';
+import { Banknote, Check, AlertCircle } from 'lucide-react';
 
 const METODE_LIST = [
   {
     id: 'Tunai',
-    nama: 'Tunai',
-    keterangan: 'Bayar langsung uang fisik',
+    nama: 'Tunai (Cash)',
+    keterangan: 'Pembayaran langsung uang fisik di kasir kantin',
     badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
     iconBg: 'bg-emerald-50 text-emerald-600',
     type: 'cash',
-  },
-  {
-    id: 'GoPay',
-    nama: 'GoPay',
-    keterangan: 'QRIS / Saldo GoPay',
-    badgeColor: 'bg-sky-100 text-sky-700 border-sky-200',
-    iconBg: 'bg-sky-50 text-[#00AED6]',
-    type: 'ewallet',
-    initial: 'G',
-  },
-  {
-    id: 'ShopeePay',
-    nama: 'ShopeePay',
-    keterangan: 'QRIS / Saldo Shopee',
-    badgeColor: 'bg-orange-100 text-orange-700 border-orange-200',
-    iconBg: 'bg-orange-50 text-[#EE4D2D]',
-    type: 'ewallet',
-    initial: 'S',
-  },
-  {
-    id: 'DANA',
-    nama: 'DANA',
-    keterangan: 'QRIS / Saldo DANA',
-    badgeColor: 'bg-blue-100 text-blue-700 border-blue-200',
-    iconBg: 'bg-blue-50 text-[#118EEA]',
-    type: 'ewallet',
-    initial: 'D',
   },
 ];
 
 export default function PilihMetodeBayar({ metodeTerpilih, onPilihMetode }) {
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      <div className="grid grid-cols-1 gap-2.5">
         {METODE_LIST.map((m) => {
           const isSelected = metodeTerpilih === m.id;
           return (
@@ -59,11 +32,7 @@ export default function PilihMetodeBayar({ metodeTerpilih, onPilihMetode }) {
               <div
                 className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${m.iconBg}`}
               >
-                {m.type === 'cash' ? (
-                  <Banknote className="w-5 h-5" />
-                ) : (
-                  <span className="font-black text-base">{m.initial}</span>
-                )}
+                <Banknote className="w-5 h-5" />
               </div>
 
               <div className="flex-1 min-w-0">

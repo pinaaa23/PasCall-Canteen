@@ -77,17 +77,12 @@ export default function RiwayatPage() {
         />
       </div>
 
-      {/* 2. Bagian Rekap Ringkasan (Total & 4 Metode) */}
+      {/* 2. Bagian Rekap Ringkasan */}
       {isLoading && !rekapData ? (
         <div className="space-y-3 animate-pulse">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="h-28 bg-slate-200 rounded-2xl" />
             <div className="h-28 bg-slate-200 rounded-2xl" />
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-20 bg-slate-200 rounded-2xl" />
-            ))}
           </div>
         </div>
       ) : (

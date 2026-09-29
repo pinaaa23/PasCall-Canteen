@@ -24,18 +24,10 @@ export default function TabelTransaksi({
   );
 
   const getMetodeBadge = (metode) => {
-    switch (metode) {
-      case 'Tunai':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      case 'GoPay':
-        return 'bg-sky-50 text-[#00AED6] border-sky-200';
-      case 'ShopeePay':
-        return 'bg-orange-50 text-[#EE4D2D] border-orange-200';
-      case 'DANA':
-        return 'bg-blue-50 text-[#118EEA] border-blue-200';
-      default:
-        return 'bg-slate-50 text-slate-700 border-slate-200';
+    if (metode === 'Tunai') {
+      return 'bg-emerald-50 text-emerald-700 border-emerald-200';
     }
+    return 'bg-slate-50 text-slate-700 border-slate-200';
   };
 
   return (
@@ -65,14 +57,14 @@ export default function TabelTransaksi({
               type="text"
               value={pencarian}
               onChange={(e) => onPencarianChange(e.target.value)}
-              placeholder="Cari ID transaksi, nama, ID / No. HP..."
+              placeholder="Cari ID transaksi, voucher, nama, ID / No. HP..."
               className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1565C0] focus:ring-1 focus:ring-blue-500"
             />
           </div>
 
           {/* Filter Metode Pill */}
           <div className="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
-            {['Semua', 'Tunai', 'GoPay', 'ShopeePay', 'DANA'].map((m) => (
+            {['Semua', 'Tunai'].map((m) => (
               <button
                 key={m}
                 type="button"

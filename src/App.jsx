@@ -4,6 +4,7 @@ import AppLayout from './layouts/AppLayout';
 import PaketPage from './pages/PaketPage';
 import RiwayatPage from './pages/RiwayatPage';
 import StrukPage from './pages/StrukPage';
+import VoucherPage from './pages/VoucherPage';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route element={<AppLayout />}>
           <Route path="/" element={<PaketPage />} />
           <Route path="/riwayat" element={<RiwayatPage />} />
+          <Route path="/voucher/:id" element={<VoucherPage />} />
           <Route path="/struk/:id" element={<StrukPage />} />
           {/* Fallback route redirect to / */}
           <Route path="*" element={<Navigate to="/" replace />} />

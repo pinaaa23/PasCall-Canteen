@@ -9,22 +9,36 @@
   }
 }
 
-/* Print styles for Struk */
+/* Print styles for Struk & Voucher */
 @media print {
   body * {
     visibility: hidden;
   }
-  #struk-cetak, #struk-cetak * {
+  #struk-cetak, #struk-cetak *,
+  #voucher-cetak, #voucher-cetak * {
     visibility: visible;
   }
-  #struk-cetak {
+  #struk-cetak, #voucher-cetak {
     position: absolute;
     left: 0;
+    right: 0;
     top: 0;
-    width: 100%;
-    margin: 0;
-    padding: 20px;
+    margin: 0 auto;
     background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  #struk-cetak {
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+  }
+  #voucher-cetak {
+    width: 100%;
+    max-width: 380px;
+    padding: 16px;
+    border: 1px dashed #94a3b8;
+    border-radius: 16px;
   }
   .no-print {
     display: none !important;
