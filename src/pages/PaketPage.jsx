@@ -6,6 +6,9 @@ import ModalBeli from '../components/ModalBeli';
 import EmptyState from '../components/EmptyState';
 import { getPaket } from '../services/kantinService';
 import { Package } from 'lucide-react';
+import { ENABLE_COMBO_PACKAGES } from '../data/paket';
+
+export { ENABLE_COMBO_PACKAGES };
 
 export default function PaketPage() {
   const [kategori, setKategori] = useState('telepon');
@@ -19,7 +22,8 @@ export default function PaketPage() {
     const loadPaket = async () => {
       setIsLoading(true);
       try {
-        const data = await getPaket(kategori);
+        const activeKategori = (!ENABLE_COMBO_PACKAGES && kategori === 'combo') ? 'telepon' : kategori;
+        const data = await getPaket(activeKategori);
         if (isMounted) {
           setPaketList(data);
         }
@@ -79,10 +83,7 @@ export default function PaketPage() {
               key={n}
               className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs animate-pulse space-y-4"
             >
-              <div className="flex justify-between items-start">
-                <div className="h-5 bg-slate-200 rounded-md w-3/5" />
-                <div className="h-5 bg-slate-100 rounded-full w-1/4" />
-              </div>
+              <div className="h-5 bg-slate-200 rounded-md w-3/5" />
               <div className="h-4 bg-slate-100 rounded-md w-4/5" />
               <div className="h-8 bg-slate-200 rounded-lg w-1/2 mt-6" />
               <div className="h-11 bg-slate-200 rounded-xl w-full" />

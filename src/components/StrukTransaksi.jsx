@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, Printer, ArrowLeft, Building2, User, CreditCard, Calendar, Clock, ShoppingBag } from 'lucide-react';
+import { CheckCircle2, Printer, ArrowLeft, Building2, User, CreditCard, Clock, ShoppingBag } from 'lucide-react';
 import { formatRupiah, formatTanggal } from '../utils/format';
 
 export default function StrukTransaksi({ transaksi }) {
@@ -16,6 +16,11 @@ export default function StrukTransaksi({ transaksi }) {
     }
     return 'bg-slate-100 text-slate-700 border-slate-200';
   };
+
+  const hargaTotal = transaksi.paket?.total ?? transaksi.paket?.harga ?? 0;
+  const dpp = transaksi.paket?.dpp ?? Math.round(hargaTotal / 1.11);
+  const ppn = transaksi.paket?.ppn ?? (hargaTotal - dpp);
+  const total = hargaTotal;
 
   return (
     <div className="w-full max-w-lg mx-auto">
@@ -48,7 +53,7 @@ export default function StrukTransaksi({ transaksi }) {
           </div>
           <h2 className="text-xl font-bold text-slate-800">Pembayaran Berhasil</h2>
           <p className="text-xs text-slate-500 mt-1">
-            Paket komunikasi WBP telah berhasil diaktifkan.
+            Paket komunikasi telah berhasil diaktifkan.
           </p>
 
           <div className="mt-4 inline-block px-3 py-1 bg-slate-100 rounded-full">
@@ -62,7 +67,7 @@ export default function StrukTransaksi({ transaksi }) {
         <div className="py-4 border-b border-dashed border-slate-200 text-xs flex justify-between items-center text-slate-500">
           <div>
             <span className="font-bold text-slate-700">PasCall Kantin Lapas</span>
-            <p className="text-[11px]">Layanan Komunikasi WBP Terpadu</p>
+            <p className="text-[11px]">Layanan Komunikasi Terpadu</p>
           </div>
           <div className="text-right">
             <span className="font-medium text-slate-600">
@@ -76,7 +81,7 @@ export default function StrukTransaksi({ transaksi }) {
           <div className="flex items-center justify-between">
             <span className="text-slate-500 text-xs flex items-center gap-1.5">
               <User className="w-3.5 h-3.5 text-slate-400" />
-              Nama WBP
+              Nama Pelanggan
             </span>
             <span className="font-bold text-slate-800">{transaksi.napi?.nama}</span>
           </div>
@@ -84,7 +89,7 @@ export default function StrukTransaksi({ transaksi }) {
           <div className="flex items-center justify-between">
             <span className="text-slate-500 text-xs flex items-center gap-1.5">
               <Building2 className="w-3.5 h-3.5 text-slate-400" />
-              ID & Kamar WBP
+              NIP & Kamar
             </span>
             <span className="font-medium text-slate-700 font-mono text-xs">
               {transaksi.napi?.id} {transaksi.napi?.blok ? `(${transaksi.napi.blok})` : ''}
@@ -110,9 +115,11 @@ export default function StrukTransaksi({ transaksi }) {
             </span>
             <div className="text-right">
               <p className="font-bold text-slate-800">{transaksi.paket?.nama}</p>
-              <p className="text-[11px] text-slate-500">
-                {transaksi.paket?.keterangan || `Masa aktif ${transaksi.paket?.masaAktif}`}
-              </p>
+              {transaksi.paket?.keterangan && (
+                <p className="text-[11px] text-slate-500">
+                  {transaksi.paket.keterangan}
+                </p>
+              )}
             </div>
           </div>
 
@@ -131,15 +138,28 @@ export default function StrukTransaksi({ transaksi }) {
           </div>
         </div>
 
-        {/* Total Pembayaran */}
-        <div className="pt-4 border-t border-slate-200">
-          <div className="flex items-center justify-between bg-blue-50/70 p-4 rounded-2xl border border-blue-100">
+        {/* Rincian Subtotal, PPN 11%, dan Total Pembayaran */}
+        <div className="pt-4 border-t border-dashed border-slate-200 space-y-2">
+          <div className="flex items-center justify-between text-xs text-slate-600">
+            <span>Subtotal (DPP)</span>
+            <span className="font-semibold text-slate-800 font-mono">
+              {formatRupiah(dpp)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between text-xs text-slate-600">
+            <span>PPN 11%</span>
+            <span className="font-semibold text-slate-800 font-mono">
+              {formatRupiah(ppn)}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between bg-blue-50/70 p-4 rounded-2xl border border-blue-100 mt-2">
             <div>
-              <span className="text-xs uppercase font-bold text-slate-500">Total Nominal</span>
-              <p className="text-[11px] text-slate-400">Sudah Termasuk PPN 11%</p>
+              <span className="text-xs uppercase font-bold text-slate-500">Total Pembayaran</span>
+              <p className="text-[11px] text-slate-400">Termasuk PPN 11%</p>
             </div>
             <span className="text-2xl font-black text-[#1565C0]">
-              {formatRupiah(transaksi.paket?.harga)}
+              {formatRupiah(total)}
             </span>
           </div>
         </div>

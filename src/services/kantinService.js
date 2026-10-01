@@ -1,4 +1,4 @@
-import { daftarPaket } from '../data/paket';
+import { buildPackages, daftarPaket, ENABLE_COMBO_PACKAGES } from '../data/paket';
 import { daftarWbp } from '../data/napi';
 import { buatIdTransaksi } from '../utils/format';
 
@@ -14,104 +14,107 @@ const seedTransaksiAwal = () => {
   const bln = sekarang.getMonth(); // 0-indexed
   const tgl = sekarang.getDate();
 
+  const telpPkts = buildPackages('telepon');
+  const videoPkts = buildPackages('video');
+
   return [
     {
       id: buatIdTransaksi(1, new Date(thn, bln, tgl, 8, 30)),
-      kodeVoucher: 'PAS-7K9M-24NT',
-      napi: { id: 'WBP-0001', nama: 'Budi Santoso', noTelp: '081234567801', blok: 'Blok A - Kamar 04' },
-      paket: daftarPaket[2], // Paket Telepon 50 Menit (25.000)
+      kodeVoucher: '74921',
+      napi: { id: 'NIP-0001', nama: 'Budi Santoso', noTelp: '081234567801', blok: 'Blok A - Kamar 04' },
+      paket: telpPkts[0], // Paket Telepon 6 Menit (5.994)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl, 8, 30).toISOString(),
     },
     {
       id: buatIdTransaksi(2, new Date(thn, bln, tgl, 9, 15)),
-      kodeVoucher: 'PAS-3B8X-9W2K',
-      napi: { id: 'WBP-0002', nama: 'Ahmad Fauzi', noTelp: '081234567802', blok: 'Blok B - Kamar 12' },
-      paket: daftarPaket[10], // Paket Video 30 Menit (30.000)
+      kodeVoucher: '38902',
+      napi: { id: 'NIP-0002', nama: 'Ahmad Fauzi', noTelp: '081234567802', blok: 'Blok B - Kamar 12' },
+      paket: videoPkts[1], // Paket Video 12 Menit (19.980)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl, 9, 15).toISOString(),
     },
     {
       id: buatIdTransaksi(3, new Date(thn, bln, tgl, 11, 20)),
-      kodeVoucher: 'PAS-4N8Y-7R3F',
-      napi: { id: 'WBP-0003', nama: 'Joko Prasetyo', noTelp: '081234567803', blok: 'Blok A - Kamar 09' },
-      paket: daftarPaket[17], // Combo Hemat (65.000)
+      kodeVoucher: '48173',
+      napi: { id: 'NIP-0003', nama: 'Joko Prasetyo', noTelp: '081234567803', blok: 'Blok A - Kamar 09' },
+      paket: telpPkts[2], // Paket Telepon 18 Menit (17.982)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl, 11, 20).toISOString(),
     },
     {
       id: buatIdTransaksi(4, new Date(thn, bln, tgl, 14, 5)),
-      kodeVoucher: 'PAS-8C2V-5T9A',
-      napi: { id: 'WBP-0004', nama: 'Hendra Gunawan', noTelp: '081234567804', blok: 'Blok C - Kamar 02' },
-      paket: daftarPaket[4], // Paket Telepon 100 Menit (45.000)
+      kodeVoucher: '82509',
+      napi: { id: 'NIP-0004', nama: 'Hendra Gunawan', noTelp: '081234567804', blok: 'Blok C - Kamar 02' },
+      paket: telpPkts[3], // Paket Telepon 24 Menit (23.976)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl, 14, 5).toISOString(),
     },
     {
       id: buatIdTransaksi(5, new Date(thn, bln, tgl, 16, 45)),
-      kodeVoucher: 'PAS-6P4D-8H2E',
-      napi: { id: 'WBP-0005', nama: 'Rizky Pratama', noTelp: '081234567805', blok: 'Blok B - Kamar 07' },
-      paket: daftarPaket[19], // Combo Keluarga (115.000)
+      kodeVoucher: '64821',
+      napi: { id: 'NIP-0005', nama: 'Rizky Pratama', noTelp: '081234567805', blok: 'Blok B - Kamar 07' },
+      paket: videoPkts[2], // Paket Video 18 Menit (29.970)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl, 16, 45).toISOString(),
     },
     // Transaksi kemarin
     {
       id: buatIdTransaksi(1, new Date(thn, bln, tgl - 1, 9, 10)),
-      kodeVoucher: 'PAS-5M3G-9J4U',
-      napi: { id: 'WBP-0006', nama: 'Dian Saputra', noTelp: '081234567806', blok: 'Blok D - Kamar 01' },
-      paket: daftarPaket[6], // Paket Telepon 200 Menit (80.000)
+      kodeVoucher: '53914',
+      napi: { id: 'NIP-0006', nama: 'Dian Saputra', noTelp: '081234567806', blok: 'Blok D - Kamar 01' },
+      paket: telpPkts[4], // Paket Telepon 30 Menit (29.970)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl - 1, 9, 10).toISOString(),
     },
     {
       id: buatIdTransaksi(2, new Date(thn, bln, tgl - 1, 13, 40)),
-      kodeVoucher: 'PAS-2R7T-4W8K',
-      napi: { id: 'WBP-0007', nama: 'Agus Setiawan', noTelp: '081234567807', blok: 'Blok C - Kamar 15' },
-      paket: daftarPaket[12], // Paket Video 60 Menit (55.000)
+      kodeVoucher: '27408',
+      napi: { id: 'NIP-0007', nama: 'Agus Setiawan', noTelp: '081234567807', blok: 'Blok C - Kamar 15' },
+      paket: videoPkts[3], // Paket Video 24 Menit (39.960)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl - 1, 13, 40).toISOString(),
     },
     {
       id: buatIdTransaksi(3, new Date(thn, bln, tgl - 1, 15, 20)),
-      kodeVoucher: 'PAS-9H5P-3C7N',
-      napi: { id: 'WBP-0008', nama: 'Muhammad Ridwan', noTelp: '081234567808', blok: 'Blok A - Kamar 03' },
-      paket: daftarPaket[2], // Paket Telepon 50 Menit (25.000)
+      kodeVoucher: '95371',
+      napi: { id: 'NIP-0008', nama: 'Muhammad Ridwan', noTelp: '081234567808', blok: 'Blok A - Kamar 03' },
+      paket: telpPkts[1], // Paket Telepon 12 Menit (11.988)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl - 1, 15, 20).toISOString(),
     },
     // Transaksi 3 hari lalu
     {
       id: buatIdTransaksi(1, new Date(thn, bln, tgl - 3, 10, 0)),
-      kodeVoucher: 'PAS-4W9B-6E8Y',
-      napi: { id: 'WBP-0001', nama: 'Budi Santoso', noTelp: '081234567801', blok: 'Blok A - Kamar 04' },
-      paket: daftarPaket[17], // Combo Hemat (65.000)
+      kodeVoucher: '49618',
+      napi: { id: 'NIP-0001', nama: 'Budi Santoso', noTelp: '081234567801', blok: 'Blok A - Kamar 04' },
+      paket: telpPkts[5], // Paket Telepon 36 Menit (35.964)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl - 3, 10, 0).toISOString(),
     },
     {
       id: buatIdTransaksi(2, new Date(thn, bln, tgl - 3, 14, 15)),
-      kodeVoucher: 'PAS-7F3K-2V9M',
-      napi: { id: 'WBP-0002', nama: 'Ahmad Fauzi', noTelp: '081234567802', blok: 'Blok B - Kamar 12' },
-      paket: daftarPaket[7], // Paket Telepon 300 Menit (110.000)
+      kodeVoucher: '73289',
+      napi: { id: 'NIP-0002', nama: 'Ahmad Fauzi', noTelp: '081234567802', blok: 'Blok B - Kamar 12' },
+      paket: videoPkts[0], // Paket Video 6 Menit (9.990)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl - 3, 14, 15).toISOString(),
     },
     // Transaksi 5 hari lalu
     {
       id: buatIdTransaksi(1, new Date(thn, bln, tgl - 5, 11, 30)),
-      kodeVoucher: 'PAS-8Y6U-4P2R',
-      napi: { id: 'WBP-0003', nama: 'Joko Prasetyo', noTelp: '081234567803', blok: 'Blok A - Kamar 09' },
-      paket: daftarPaket[14], // Paket Video 120 Menit (100.000)
+      kodeVoucher: '86412',
+      napi: { id: 'NIP-0003', nama: 'Joko Prasetyo', noTelp: '081234567803', blok: 'Blok A - Kamar 09' },
+      paket: videoPkts[4], // Paket Video 30 Menit (49.950)
       metode: 'Tunai',
       waktu: new Date(thn, bln, tgl - 5, 11, 30).toISOString(),
     },
     // Transaksi bulan lalu
     {
       id: buatIdTransaksi(1, new Date(thn, bln - 1, 15, 10, 30)),
-      kodeVoucher: 'PAS-3K7D-9T5W',
-      napi: { id: 'WBP-0004', nama: 'Hendra Gunawan', noTelp: '081234567804', blok: 'Blok C - Kamar 02' },
-      paket: daftarPaket[2], // Paket Telepon 50 Menit (25.000)
+      kodeVoucher: '37951',
+      napi: { id: 'NIP-0004', nama: 'Hendra Gunawan', noTelp: '081234567804', blok: 'Blok C - Kamar 02' },
+      paket: telpPkts[0], // Paket Telepon 6 Menit (5.994)
       metode: 'Tunai',
       waktu: new Date(thn, bln - 1, 15, 10, 30).toISOString(),
     },
@@ -128,14 +131,42 @@ const getStoredTransaksi = () => {
     }
     const parsed = JSON.parse(raw);
     let modified = false;
-    const normalized = parsed.map((item) => {
-      let current = item;
-      if (current.metode !== 'Tunai') {
-        current = { ...current, metode: 'Tunai' };
-        modified = true;
-      }
-      return current;
-    });
+    const seenIds = new Set();
+    const normalized = parsed
+      .filter((item) => {
+        if (!ENABLE_COMBO_PACKAGES && item.paket?.kategori === 'combo') {
+          modified = true;
+          return false;
+        }
+        return true;
+      })
+      .map((item, idx) => {
+        let current = { ...item };
+        if (current.metode !== 'Tunai') {
+          current.metode = 'Tunai';
+          modified = true;
+        }
+        // Normalize WBP- prefix to NIP-
+        if (current.napi?.id && current.napi.id.startsWith('WBP-')) {
+          current.napi = {
+            ...current.napi,
+            id: current.napi.id.replace(/^WBP-/, 'NIP-'),
+          };
+          modified = true;
+        }
+        // Normalize legacy voucher code format (e.g. PAS-XXXX-XXXX) to 5-digit format
+        if (current.kodeVoucher && current.kodeVoucher.startsWith('PAS-')) {
+          current.kodeVoucher = buatKodeVoucher();
+          modified = true;
+        }
+        if (seenIds.has(current.id)) {
+          current.id = `${current.id}-${idx + 1}`;
+          modified = true;
+        } else if (current.id) {
+          seenIds.add(current.id);
+        }
+        return current;
+      });
     if (modified) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
     }
@@ -155,21 +186,20 @@ const saveStoredTransaksi = (data) => {
 };
 
 /**
- * TODO: ganti dengan API backend
- * Mengambil daftar paket berdasarkan kategori (telepon / video / combo)
+ * Mengambil daftar paket berdasarkan kategori (telepon / video)
  */
 export async function getPaket(kategori = 'telepon') {
   await delay(250);
-  if (!kategori || kategori === 'semua') {
+  const typeKey = (kategori || 'telepon').toLowerCase();
+  if (typeKey === 'semua') {
     return daftarPaket;
   }
-  return daftarPaket.filter((p) => p.kategori.toLowerCase() === kategori.toLowerCase());
+  return buildPackages(typeKey);
 }
 
 /**
- * TODO: ganti dengan API backend
- * Mencari data WBP berdasarkan ID atau No. Telepon
- * Mendukung pencarian: "WBP-0001", "0001", "081234567801", "0812-3456-7801", "+6281234567801"
+ * Mencari data pelanggan berdasarkan NIP atau No. Telepon
+ * Mendukung pencarian: "NIP-0001", "WBP-0001", "0001", "081234567801", "0812-3456-7801", "+6281234567801"
  */
 export async function cariWbpByIdAtauTelp(queryInput) {
   await delay(300);
@@ -187,11 +217,19 @@ export async function cariWbpByIdAtauTelp(queryInput) {
     const cleanId = item.id.replace(/[\s\-_]/g, '').toUpperCase();
     const cleanTelp = (item.noTelp || '').replace(/[\s\-_+.]/g, '');
     
-    // Cocokkan ID penuh (WBP-0001 / WBP0001) atau nomornya (0001)
-    const matchId = cleanId === cleanQuery || cleanId.includes(cleanQuery) || item.id.toUpperCase() === rawQuery.toUpperCase();
+    // Cocokkan NIP (NIP-0001 / NIP0001 / WBP0001) atau nomor digitnya (0001)
+    const matchId =
+      cleanId === cleanQuery ||
+      cleanId.includes(cleanQuery) ||
+      cleanId.replace('NIP', 'WBP') === cleanQuery ||
+      cleanQuery.replace('WBP', 'NIP') === cleanId ||
+      item.id.toUpperCase() === rawQuery.toUpperCase();
     
     // Cocokkan nomor telepon
-    const matchTelp = cleanTelp === phoneNormalized || cleanTelp.endsWith(phoneNormalized) || cleanTelp.includes(phoneNormalized);
+    const matchTelp =
+      cleanTelp === phoneNormalized ||
+      cleanTelp.endsWith(phoneNormalized) ||
+      cleanTelp.includes(phoneNormalized);
 
     return matchId || matchTelp;
   });
@@ -203,32 +241,20 @@ export async function cariWbpByIdAtauTelp(queryInput) {
 export const cariNapiById = cariWbpByIdAtauTelp;
 
 /**
- * TODO: kode voucher sebaiknya dibuat dan divalidasi oleh backend. Kode ini hanya simulasi.
- * Menghasilkan kode voucher unik dengan format PAS-XXXX-XXXX
- * Menggunakan huruf besar & angka tanpa karakter ambigu (tanpa 0, O, 1, I, L)
+ * Menghasilkan kode voucher unik 5 angka acak (contoh: 74921)
+ * Memudahkan warga binaan (napi) untuk menghafal dan menginput ke wartelsus
  */
 export function buatKodeVoucher(existingCodes = []) {
-  const chars = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
   const existingSet = new Set(
-    existingCodes.filter(Boolean).map((c) => c.toString().toUpperCase())
+    existingCodes.filter(Boolean).map((c) => c.toString().trim())
   );
-
-  const generateSegment = (length = 4) => {
-    const randomBytes = new Uint8Array(length);
-    crypto.getRandomValues(randomBytes);
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += chars[randomBytes[i] % chars.length];
-    }
-    return result;
-  };
 
   let code = '';
   let attempts = 0;
   do {
-    const part1 = generateSegment(4);
-    const part2 = generateSegment(4);
-    code = `PAS-${part1}-${part2}`;
+    // Generate 5 digit angka acak antara 10000 s/d 99999
+    const randomNum = Math.floor(10000 + Math.random() * 90000);
+    code = randomNum.toString();
     attempts++;
   } while (existingSet.has(code) && attempts < 100);
 
@@ -236,7 +262,6 @@ export function buatKodeVoucher(existingCodes = []) {
 }
 
 /**
- * TODO: ganti dengan API backend
  * Membuat transaksi baru dengan nomor urut naik per hari dan waktu terkini
  */
 export async function buatTransaksi({ napi, paket, metode }) {
@@ -258,7 +283,16 @@ export async function buatTransaksi({ napi, paket, metode }) {
     );
   });
 
-  const nextSeq = trxHariIni.length + 1;
+  let maxSeq = 0;
+  trxHariIni.forEach((item) => {
+    const match = (item.id || '').match(/-(\d+)$/);
+    if (match) {
+      const num = parseInt(match[1], 10);
+      if (num > maxSeq) maxSeq = num;
+    }
+  });
+
+  const nextSeq = Math.max(maxSeq + 1, trxHariIni.length + 1);
   const newId = buatIdTransaksi(nextSeq, sekarang);
 
   // Buat kode voucher unik
@@ -281,7 +315,6 @@ export async function buatTransaksi({ napi, paket, metode }) {
 }
 
 /**
- * TODO: ganti dengan API backend
  * Mengambil detail transaksi berdasarkan ID
  */
 export async function getTransaksiById(id) {
@@ -293,7 +326,6 @@ export async function getTransaksiById(id) {
 }
 
 /**
- * TODO: ganti dengan API backend
  * Mengambil riwayat transaksi dengan filter pencarian, metode, periode, dan tanggal
  */
 export async function getRiwayat({ cari = '', metode = 'Semua', periode = 'harian', tanggal = new Date() } = {}) {
@@ -330,21 +362,21 @@ export async function getRiwayat({ cari = '', metode = 'Semua', periode = 'haria
     list = list.filter((item) => item.metode.toLowerCase() === metode.toLowerCase());
   }
 
-  // Filter pencarian (ID Transaksi, Nama WBP, ID WBP, No Telp, Nama Paket, Kode Voucher)
+  // Filter pencarian (ID Transaksi, Nama, NIP, No Telp, Nama Paket, Kode Voucher)
   if (cari && cari.trim()) {
     const q = cari.trim().toLowerCase();
     list = list.filter((item) => {
       const idTrx = (item.id || '').toLowerCase();
       const voucher = (item.kodeVoucher || '').toLowerCase();
-      const namaWbp = (item.napi?.nama || '').toLowerCase();
-      const idWbp = (item.napi?.id || '').toLowerCase();
+      const namaPelanggan = (item.napi?.nama || '').toLowerCase();
+      const nip = (item.napi?.id || '').toLowerCase();
       const noTelp = (item.napi?.noTelp || '').toLowerCase();
       const namaPaket = (item.paket?.nama || '').toLowerCase();
       return (
         idTrx.includes(q) ||
         voucher.includes(q) ||
-        namaWbp.includes(q) ||
-        idWbp.includes(q) ||
+        namaPelanggan.includes(q) ||
+        nip.includes(q) ||
         noTelp.includes(q) ||
         namaPaket.includes(q)
       );
@@ -358,7 +390,6 @@ export async function getRiwayat({ cari = '', metode = 'Semua', periode = 'haria
 }
 
 /**
- * TODO: ganti dengan API backend
  * Mengambil rekap pemasukan, jumlah transaksi, breakdown per metode bayar, dan data chart
  */
 export async function getRekap({ periode = 'harian', tanggal = new Date() } = {}) {

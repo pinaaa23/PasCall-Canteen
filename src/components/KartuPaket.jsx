@@ -1,27 +1,21 @@
 import React from 'react';
 import { formatRupiah } from '../utils/format';
-import { ShoppingCart, Clock, CheckCircle2 } from 'lucide-react';
+import { ShoppingCart, CheckCircle2 } from 'lucide-react';
 
 export default function KartuPaket({ paket, onBeli }) {
-  const { nama, subNama, durasi, masaAktif, keterangan, harga } = paket;
+  const { nama, subNama, durasi, keterangan, harga } = paket;
 
   return (
     <div className="group relative flex flex-col justify-between bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-200">
-      {/* Header Kartu: Nama & Badge Masa Aktif */}
+      {/* Header Kartu: Nama Paket */}
       <div>
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <div>
-            <h3 className="text-lg font-bold text-slate-800 group-hover:text-[#1565C0] transition-colors">
-              {nama}
-            </h3>
-            {subNama && (
-              <p className="text-xs font-medium text-slate-500 mt-0.5">{subNama}</p>
-            )}
-          </div>
-          <span className="inline-flex items-center gap-1 shrink-0 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#E3F2FD] text-[#1565C0] border border-blue-100">
-            <Clock className="w-3 h-3" />
-            {masaAktif}
-          </span>
+        <div className="mb-2">
+          <h3 className="text-lg font-bold text-slate-800 group-hover:text-[#1565C0] transition-colors">
+            {nama}
+          </h3>
+          {subNama && (
+            <p className="text-xs font-medium text-slate-500 mt-0.5">{subNama}</p>
+          )}
         </div>
 
         {/* Durasi & Keterangan */}
@@ -30,9 +24,11 @@ export default function KartuPaket({ paket, onBeli }) {
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
             <span>{durasi}</span>
           </div>
-          <p className="text-xs text-slate-500 font-normal">
-            {keterangan}
-          </p>
+          {keterangan && (
+            <p className="text-xs text-slate-500 font-normal">
+              {keterangan}
+            </p>
+          )}
         </div>
       </div>
 

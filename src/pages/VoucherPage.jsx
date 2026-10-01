@@ -36,7 +36,7 @@ export default function VoucherPage() {
     };
   }, [id]);
 
-  const kodeVoucher = transaksi?.kodeVoucher || 'PAS-XXXX-XXXX';
+  const kodeVoucher = transaksi?.kodeVoucher || '12345';
 
   const handleSalinKode = async () => {
     if (!kodeVoucher) return;
@@ -91,7 +91,7 @@ export default function VoucherPage() {
           Pembayaran Berhasil
         </h2>
         <p className="text-xs text-slate-500 mt-0.5">
-          Berikan kode ini kepada warga binaan (WBP).
+          Berikan kode ini kepada warga binaan.
         </p>
       </div>
 
@@ -120,17 +120,17 @@ export default function VoucherPage() {
           </p>
         </div>
 
-        {/* Bagian Bawah: Nama WBP, ID WBP, dan Nama Paket saja (Kata Napi dihapus) */}
+        {/* Bagian Bawah: Nama Pelanggan, NIP, dan Nama Paket */}
         <div className="p-4 sm:p-5 space-y-2.5 bg-white text-xs">
           <div className="flex justify-between items-center py-1 border-b border-slate-100">
-            <span className="text-slate-500 font-medium">Nama WBP</span>
+            <span className="text-slate-500 font-medium">Nama Pelanggan</span>
             <span className="font-bold text-slate-800 text-sm">
               {transaksi.napi?.nama || '-'}
             </span>
           </div>
 
           <div className="flex justify-between items-center py-1 border-b border-slate-100">
-            <span className="text-slate-500 font-medium">ID WBP</span>
+            <span className="text-slate-500 font-medium">NIP</span>
             <span className="font-mono font-bold text-slate-800">
               {transaksi.napi?.id || '-'}
             </span>

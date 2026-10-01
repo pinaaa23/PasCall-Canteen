@@ -22,7 +22,7 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
   const handleCariWbp = async (e) => {
     if (e) e.preventDefault();
     if (!idInput.trim()) {
-      setErrorPencarian('Silakan masukkan ID atau Nomor Telepon terlebih dahulu.');
+      setErrorPencarian('Silakan masukkan NIP atau Nomor Telepon terlebih dahulu.');
       return;
     }
 
@@ -36,7 +36,7 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
         setWbpTerpilih(data);
         setErrorPencarian('');
       } else {
-        setErrorPencarian('Data tidak ditemukan, periksa kembali ID atau nomor telepon.');
+        setErrorPencarian('Data tidak ditemukan, periksa kembali NIP atau nomor telepon.');
       }
     } catch (err) {
       setErrorPencarian('Terjadi kesalahan saat mencari data.');
@@ -96,7 +96,7 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
               {step === 1 ? 'Pengisian Paket - Langkah 1' : 'Pengisian Paket - Langkah 2'}
             </h3>
             <p className="text-xs text-slate-500">
-              {step === 1 ? 'Pencarian ID / Nomor Telepon' : 'Konfirmasi & Metode Pembayaran'}
+              {step === 1 ? 'Pencarian NIP / Nomor Telepon' : 'Konfirmasi & Metode Pembayaran'}
             </p>
           </div>
           <button
@@ -120,7 +120,7 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
                 1
               </div>
               <span className={`text-xs font-semibold ${step >= 1 ? 'text-[#1565C0]' : 'text-slate-400'}`}>
-                ID / No. Telp
+                NIP / No. Telp
               </span>
             </div>
 
@@ -150,22 +150,21 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
                 Paket Terpilih
               </span>
               <p className="text-sm font-bold text-slate-800">{paket.nama}</p>
-              <p className="text-xs text-slate-500">{paket.keterangan}</p>
+              {paket.keterangan && <p className="text-xs text-slate-500">{paket.keterangan}</p>}
             </div>
             <div className="text-right">
               <span className="text-base font-extrabold text-[#1565C0]">
                 {formatRupiah(paket.harga)}
               </span>
-              <span className="block text-[10px] text-slate-400">Masa aktif {paket.masaAktif}</span>
             </div>
           </div>
 
-          {/* STEP 1: Masukkan ID atau No. Telepon */}
+          {/* STEP 1: Masukkan NIP atau No. Telepon */}
           {step === 1 && (
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                  ID atau No. Telepon <span className="text-red-500">*</span>
+                  NIP atau No. Telepon <span className="text-red-500">*</span>
                 </label>
                 <form onSubmit={handleCariWbp} className="flex gap-2">
                   <div className="relative flex-1">
@@ -176,7 +175,7 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
                         setIdInput(e.target.value);
                         if (errorPencarian) setErrorPencarian('');
                       }}
-                      placeholder="Contoh: WBP-0001 atau 081234567801"
+                      placeholder="Contoh: NIP-0001 atau 081234567801"
                       className="w-full pl-3.5 pr-3 py-2.5 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-blue-500/20"
                       autoFocus
                     />
@@ -195,7 +194,7 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
                   </button>
                 </form>
                 <p className="text-[11px] text-slate-400 mt-1.5">
-                  Cari berdasarkan ID (<span className="font-mono text-slate-600 font-semibold">WBP-0001</span>) atau No. HP (<span className="font-mono text-slate-600 font-semibold">081234567801</span>)
+                  Cari berdasarkan NIP (<span className="font-mono text-slate-600 font-semibold">NIP-0001</span>) atau No. HP (<span className="font-mono text-slate-600 font-semibold">081234567801</span>)
                 </p>
               </div>
 
@@ -224,7 +223,7 @@ export default function ModalBeli({ paket, isOpen, onClose }) {
                   <span className="font-bold text-slate-800">{wbpTerpilih?.nama}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">ID / No. Telp:</span>
+                  <span className="text-slate-500">NIP / No. Telp:</span>
                   <span className="font-mono font-bold text-slate-800">
                     {wbpTerpilih?.id} {wbpTerpilih?.noTelp ? `• ${wbpTerpilih.noTelp}` : ''}
                   </span>

@@ -1,239 +1,91 @@
-export const daftarPaket = [
-  // ==========================================
-  // Kategori: Telepon (9 Pilihan Bertingkat)
-  // ==========================================
-  {
-    id: 'pkt-telp-20',
-    nama: 'Paket Telepon 20 Menit',
-    kategori: 'telepon',
-    durasi: '20 Menit',
-    masaAktif: '3 Hari',
-    masaAktifHari: 3,
-    keterangan: 'Masa aktif 3 hari • Semua Operator',
-    harga: 12000,
+// TODO: TARIFF nantinya diambil dari API backend (tim BE)
+export const TARIFF = {
+  ratesPerSecond: {
+    telepon: 15,
+    video: 25,
   },
-  {
-    id: 'pkt-telp-35',
-    nama: 'Paket Telepon 35 Menit',
-    kategori: 'telepon',
-    durasi: '35 Menit',
-    masaAktif: '5 Hari',
-    masaAktifHari: 5,
-    keterangan: 'Masa aktif 5 hari • Semua Operator',
-    harga: 18000,
-  },
-  {
-    id: 'pkt-telp-50',
-    nama: 'Paket Telepon 50 Menit',
-    kategori: 'telepon',
-    durasi: '50 Menit',
-    masaAktif: '7 Hari',
-    masaAktifHari: 7,
-    keterangan: 'Masa aktif 7 hari • Semua Operator',
-    harga: 25000,
-  },
-  {
-    id: 'pkt-telp-75',
-    nama: 'Paket Telepon 75 Menit',
-    kategori: 'telepon',
-    durasi: '75 Menit',
-    masaAktif: '10 Hari',
-    masaAktifHari: 10,
-    keterangan: 'Masa aktif 10 hari • Semua Operator',
-    harga: 35000,
-  },
-  {
-    id: 'pkt-telp-100',
-    nama: 'Paket Telepon 100 Menit',
-    kategori: 'telepon',
-    durasi: '100 Menit',
-    masaAktif: '14 Hari',
-    masaAktifHari: 14,
-    keterangan: 'Masa aktif 14 hari • Semua Operator',
-    harga: 45000,
-  },
-  {
-    id: 'pkt-telp-150',
-    nama: 'Paket Telepon 150 Menit',
-    kategori: 'telepon',
-    durasi: '150 Menit',
-    masaAktif: '21 Hari',
-    masaAktifHari: 21,
-    keterangan: 'Masa aktif 21 hari • Semua Operator',
-    harga: 65000,
-  },
-  {
-    id: 'pkt-telp-200',
-    nama: 'Paket Telepon 200 Menit',
-    kategori: 'telepon',
-    durasi: '200 Menit',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Semua Operator',
-    harga: 80000,
-  },
-  {
-    id: 'pkt-telp-300',
-    nama: 'Paket Telepon 300 Menit',
-    kategori: 'telepon',
-    durasi: '300 Menit',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Semua Operator',
-    harga: 110000,
-  },
-  {
-    id: 'pkt-telp-500',
-    nama: 'Paket Telepon 500 Menit',
-    kategori: 'telepon',
-    durasi: '500 Menit',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Kuota Maksimal',
-    harga: 175000,
-  },
+  ppnRate: 0.11,
+  stepMinutes: 6,
+  presets: [6, 12, 18, 24, 30, 36],
+};
 
-  // ==========================================
-  // Kategori: Video Call (7 Pilihan Bertingkat)
-  // ==========================================
-  {
-    id: 'pkt-video-15',
-    nama: 'Paket Video 15 Menit',
-    kategori: 'video',
-    durasi: '15 Menit',
-    masaAktif: '3 Hari',
-    masaAktifHari: 3,
-    keterangan: 'Masa aktif 3 hari • Kualitas HD',
-    harga: 18000,
-  },
-  {
-    id: 'pkt-video-30',
-    nama: 'Paket Video 30 Menit',
-    kategori: 'video',
-    durasi: '30 Menit',
-    masaAktif: '7 Hari',
-    masaAktifHari: 7,
-    keterangan: 'Masa aktif 7 hari • Kualitas HD',
-    harga: 30000,
-  },
-  {
-    id: 'pkt-video-45',
-    nama: 'Paket Video 45 Menit',
-    kategori: 'video',
-    durasi: '45 Menit',
-    masaAktif: '10 Hari',
-    masaAktifHari: 10,
-    keterangan: 'Masa aktif 10 hari • Kualitas HD',
-    harga: 42000,
-  },
-  {
-    id: 'pkt-video-60',
-    nama: 'Paket Video 60 Menit',
-    kategori: 'video',
-    durasi: '60 Menit',
-    masaAktif: '14 Hari',
-    masaAktifHari: 14,
-    keterangan: 'Masa aktif 14 hari • Kualitas HD',
-    harga: 55000,
-  },
-  {
-    id: 'pkt-video-90',
-    nama: 'Paket Video 90 Menit',
-    kategori: 'video',
-    durasi: '90 Menit',
-    masaAktif: '21 Hari',
-    masaAktifHari: 21,
-    keterangan: 'Masa aktif 21 hari • Kualitas HD',
-    harga: 78000,
-  },
-  {
-    id: 'pkt-video-120',
-    nama: 'Paket Video 120 Menit',
-    kategori: 'video',
-    durasi: '120 Menit',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Kualitas HD',
-    harga: 100000,
-  },
-  {
-    id: 'pkt-video-180',
-    nama: 'Paket Video 180 Menit',
-    kategori: 'video',
-    durasi: '180 Menit',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Kualitas Full HD',
-    harga: 145000,
-  },
+/**
+ * Konfigurasi visibilitas Paket Combo
+ * Ubah menjadi `true` untuk mengaktifkan kembali kategori & paket combo.
+ */
+export const ENABLE_COMBO_PACKAGES = false;
 
-  // ==========================================
-  // Kategori: Combo (6 Pilihan Bertingkat)
-  // ==========================================
-  {
-    id: 'pkt-combo-kilat',
-    nama: 'Combo Kilat',
-    subNama: '30 Menit Telepon + 15 Menit Video',
-    kategori: 'combo',
-    durasi: '30 Menit Telp + 15 Menit Video',
-    masaAktif: '7 Hari',
-    masaAktifHari: 7,
-    keterangan: 'Masa aktif 7 hari • Hemat Singkat',
-    harga: 38000,
-  },
-  {
-    id: 'pkt-combo-hemat',
-    nama: 'Combo Hemat',
-    subNama: '100 Menit Telepon + 30 Menit Video',
-    kategori: 'combo',
-    durasi: '100 Menit Telp + 30 Menit Video',
-    masaAktif: '14 Hari',
-    masaAktifHari: 14,
-    keterangan: 'Masa aktif 14 hari • Paling Favorit',
-    harga: 65000,
-  },
-  {
-    id: 'pkt-combo-santai',
-    nama: 'Combo Santai',
-    subNama: '150 Menit Telepon + 45 Menit Video',
-    kategori: 'combo',
-    durasi: '150 Menit Telp + 45 Menit Video',
-    masaAktif: '21 Hari',
-    masaAktifHari: 21,
-    keterangan: 'Masa aktif 21 hari • Fleksibel',
-    harga: 90000,
-  },
-  {
-    id: 'pkt-combo-keluarga',
-    nama: 'Combo Keluarga',
-    subNama: '200 Menit Telepon + 60 Menit Video',
-    kategori: 'combo',
-    durasi: '200 Menit Telp + 60 Menit Video',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Kuota Lengkap',
-    harga: 115000,
-  },
-  {
-    id: 'pkt-combo-premium',
-    nama: 'Combo Premium',
-    subNama: '300 Menit Telepon + 90 Menit Video',
-    kategori: 'combo',
-    durasi: '300 Menit Telp + 90 Menit Video',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Komunikasi Intensif',
-    harga: 160000,
-  },
-  {
-    id: 'pkt-combo-ultimate',
-    nama: 'Combo Ultimate',
-    subNama: '500 Menit Telepon + 120 Menit Video',
-    kategori: 'combo',
-    durasi: '500 Menit Telp + 120 Menit Video',
-    masaAktif: '30 Hari',
-    masaAktifHari: 30,
-    keterangan: 'Masa aktif 30 hari • Paling Lengkap & Puas',
-    harga: 230000,
-  },
-];
+/**
+ * Menghitung harga paket berdasarkan jenis paket dan durasi (menit)
+ * dpp   = menit × 60 × tarifPerDetik
+ * ppn   = dpp × 0,11
+ * total = dpp + ppn
+ *
+ * @param {'telepon'|'video'} type
+ * @param {number} minutes
+ * @returns {{ dpp: number, ppn: number, total: number }}
+ */
+export function calcPrice(type, minutes) {
+  const typeKey = (type || 'telepon').toLowerCase();
+  const rateKey = typeKey.includes('video') ? 'video' : 'telepon';
+  const rate = TARIFF.ratesPerSecond[rateKey] || 0;
+
+  const dpp = Math.round(minutes * 60 * rate);
+  const ppn = Math.round(dpp * TARIFF.ppnRate);
+  const total = dpp + ppn;
+
+  return { dpp, ppn, total };
+}
+
+/**
+ * Menghasilkan daftar preset paket berdasarkan TARIFF
+ *
+ * @param {'telepon'|'video'} type
+ * @returns {Array<{ id: string, nama: string, kategori: string, menit: number, durasi: string, keterangan: string, dpp: number, ppn: number, total: number, harga: number }>}
+ */
+export function buildPackages(type = 'telepon') {
+  const typeKey = (type || 'telepon').toLowerCase();
+  const presets = TARIFF.presets || [6, 12, 18, 24, 30, 36];
+
+  if (typeKey === 'telepon') {
+    return presets.map((min) => {
+      const { dpp, ppn, total } = calcPrice('telepon', min);
+      return {
+        id: `pkt-telp-${min}`,
+        nama: `Paket Telepon ${min} Menit`,
+        kategori: 'telepon',
+        menit: min,
+        durasi: `${min} Menit`,
+        keterangan: 'Semua Operator',
+        dpp,
+        ppn,
+        total,
+        harga: total,
+      };
+    });
+  }
+
+  if (typeKey === 'video' || typeKey === 'video call') {
+    return presets.map((min) => {
+      const { dpp, ppn, total } = calcPrice('video', min);
+      return {
+        id: `pkt-video-${min}`,
+        nama: `Paket Video ${min} Menit`,
+        kategori: 'video',
+        menit: min,
+        durasi: `${min} Menit`,
+        keterangan: 'Semua Operator',
+        dpp,
+        ppn,
+        total,
+        harga: total,
+      };
+    });
+  }
+
+  return [];
+}
+
+export const daftarPaketTelepon = buildPackages('telepon');
+export const daftarPaketVideo = buildPackages('video');
+export const daftarPaket = [...daftarPaketTelepon, ...daftarPaketVideo];

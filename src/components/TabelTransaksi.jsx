@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Filter, ArrowUpRight, AlertCircle, FileSpreadsheet } from 'lucide-react';
+import { Search, ArrowUpRight, FileSpreadsheet } from 'lucide-react';
 import { formatRupiah, formatTanggal } from '../utils/format';
 import EmptyState from './EmptyState';
 
@@ -57,7 +57,7 @@ export default function TabelTransaksi({
               type="text"
               value={pencarian}
               onChange={(e) => onPencarianChange(e.target.value)}
-              placeholder="Cari ID transaksi, voucher, nama, ID / No. HP..."
+              placeholder="Cari ID transaksi, voucher, nama, NIP / No. HP..."
               className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1565C0] focus:ring-1 focus:ring-blue-500"
             />
           </div>
@@ -104,7 +104,7 @@ export default function TabelTransaksi({
                 <th className="py-3.5 px-4">ID Transaksi</th>
                 <th className="py-3.5 px-4">Waktu</th>
                 <th className="py-3.5 px-4">Nama Pelanggan</th>
-                <th className="py-3.5 px-4">ID / No. Telp</th>
+                <th className="py-3.5 px-4">NIP / No. Telp</th>
                 <th className="py-3.5 px-4">Keterangan Paket</th>
                 <th className="py-3.5 px-4">Metode</th>
                 <th className="py-3.5 px-4 text-right">Nominal</th>
@@ -112,9 +112,9 @@ export default function TabelTransaksi({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {transaksiList.map((item) => (
+              {transaksiList.map((item, idx) => (
                 <tr
-                  key={item.id}
+                  key={item.id ? `${item.id}-${idx}` : idx}
                   onClick={() => handleRowClick(item.id)}
                   className="hover:bg-blue-50/40 cursor-pointer transition-colors group"
                 >
