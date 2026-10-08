@@ -1,11 +1,12 @@
 import { buildPackages, daftarPaket, ENABLE_COMBO_PACKAGES } from '../data/paket';
 import { daftarWbp } from '../data/napi';
 import { buatIdTransaksi } from '../utils/format';
+import { isDummyMode } from '../dummy';
 
 const STORAGE_KEY = 'pascall_kantin_transaksi';
 
 // Helper simulasi delay network API
-const delay = (ms = 350) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms = 200) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Data transaksi awal (12 data contoh metode Tunai)
 const seedTransaksiAwal = () => {
@@ -265,7 +266,7 @@ export function buatKodeVoucher(existingCodes = []) {
  * Membuat transaksi baru dengan nomor urut naik per hari dan waktu terkini
  */
 export async function buatTransaksi({ napi, paket, metode }) {
-  await delay(400);
+  await delay(200);
   const list = getStoredTransaksi();
   const sekarang = new Date();
   
@@ -310,6 +311,28 @@ export async function buatTransaksi({ napi, paket, metode }) {
 
   const updatedList = [transaksiBaru, ...list];
   saveStoredTransaksi(updatedList);
+
+  // Sync ke dummyStore (shared store) jika mode demo aktif
+  if (isDummyMode()) {
+    const { dummyStore } = await import('../dummy/store');
+    dummyStore.addTransaction({
+      id: newId,
+      inmateId: napi?.id || 'REG-CPN-2026-001',
+      inmateName: napi?.nama || 'Warga Binaan',
+      amount: paket?.harga || 0,
+      category: 'Kantin',
+      type: 'TOPUP_CASH',
+      description: `Pembelian ${paket?.nama || 'Paket Telepon'} (Voucher #${kodeVoucher})`,
+      officerId: 'usr-ktn-01',
+      officerName: 'Siti Rahmawati (Operator Kantin)',
+      method: 'Tunai',
+      status: 'Berhasil',
+      date: sekarang.toISOString(),
+      balanceBefore: 0,
+      balanceAfter: paket?.harga || 0,
+      branchId: 'b1',
+    });
+  }
 
   return transaksiBaru;
 }

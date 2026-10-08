@@ -6,8 +6,10 @@ import {
   hitungRingkasanWartel,
   subscribeWartelUpdate,
 } from '../services/wartelService';
+import { isDummyMode } from '../dummy';
 
 export default function WartelBadgeSidebar() {
+  const dummyActive = isDummyMode();
   const [summary, setSummary] = useState(() =>
     hitungRingkasanWartel(getStoredWartel())
   );
@@ -24,7 +26,7 @@ export default function WartelBadgeSidebar() {
   }, []);
 
   const { total = 10, digunakan = 0 } = summary;
-  const isBanyakDigunakan = digunakan > total / 2;
+  const isBanyakDigunakan = dummyActive && digunakan > total / 2;
 
   return (
     <NavLink
@@ -33,6 +35,8 @@ export default function WartelBadgeSidebar() {
         `block p-3 rounded-2xl border transition-all duration-150 group ${
           isActive
             ? 'bg-[#E3F2FD] border-blue-200 shadow-2xs'
+            : !dummyActive
+            ? 'bg-slate-50/80 hover:bg-slate-100/80 border-slate-200'
             : isBanyakDigunakan
             ? 'bg-rose-50/70 hover:bg-rose-50 border-rose-200/80 hover:border-rose-300'
             : 'bg-emerald-50/70 hover:bg-emerald-50 border-emerald-200/80 hover:border-emerald-300'
@@ -42,27 +46,37 @@ export default function WartelBadgeSidebar() {
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
           <span className="relative flex h-2.5 w-2.5 shrink-0">
-            <span
-              className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                isBanyakDigunakan ? 'bg-rose-400' : 'bg-emerald-400'
-              }`}
-            />
+            {dummyActive && (
+              <span
+                className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                  isBanyakDigunakan ? 'bg-rose-400' : 'bg-emerald-400'
+                }`}
+              />
+            )}
             <span
               className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
-                isBanyakDigunakan ? 'bg-rose-500' : 'bg-emerald-500'
+                !dummyActive
+                  ? 'bg-slate-400'
+                  : isBanyakDigunakan
+                  ? 'bg-rose-500'
+                  : 'bg-emerald-500'
               }`}
             />
           </span>
           <div className="truncate">
             <span
               className={`text-xs font-bold leading-tight block truncate ${
-                isBanyakDigunakan ? 'text-rose-800' : 'text-emerald-800'
+                !dummyActive
+                  ? 'text-slate-600'
+                  : isBanyakDigunakan
+                  ? 'text-rose-800'
+                  : 'text-emerald-800'
               }`}
             >
-              {digunakan} dari {total} Wartel Digunakan
+              {dummyActive ? `${digunakan} dari ${total} Wartel Digunakan` : '- dari - Wartel Digunakan'}
             </span>
             <span className="text-[10px] text-slate-500 font-medium block">
-              Klik untuk pantau bilik
+              {dummyActive ? 'Klik untuk pantau bilik' : 'Menunggu koneksi server'}
             </span>
           </div>
         </div>

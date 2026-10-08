@@ -9,6 +9,7 @@ import StatusWartelPage from './pages/StatusWartelPage';
 import RiwayatPage from './pages/RiwayatPage';
 import StrukPage from './pages/StrukPage';
 import VoucherPage from './pages/VoucherPage';
+import TopUpSaldoPage from './pages/TopUpSaldoPage';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/" element={<PaketPage />} />
             <Route path="/status-wartel" element={<StatusWartelPage />} />
             <Route path="/riwayat" element={<RiwayatPage />} />
+            <Route path="/top-up-saldo" element={<TopUpSaldoPage />} />
             <Route path="/voucher/:id" element={<VoucherPage />} />
             <Route path="/struk/:id" element={<StrukPage />} />
             {/* Fallback route redirect to / */}

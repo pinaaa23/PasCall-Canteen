@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingBag, History, Calendar, Store, PhoneCall, LogOut, User } from 'lucide-react';
+import { ShoppingBag, History, Calendar, Store, PhoneCall, LogOut, User, Wallet } from 'lucide-react';
 import { formatTanggal } from '../utils/format';
 import { useAuth } from '../context/AuthContext';
 import WartelBadgeSidebar from '../components/WartelBadgeSidebar';
+import SaldoBadgeSidebar from '../components/SaldoBadgeSidebar';
 
 export default function AppLayout() {
   const location = useLocation();
@@ -15,6 +16,7 @@ export default function AppLayout() {
     if (location.pathname === '/') return 'Katalog Paket Komunikasi';
     if (location.pathname.startsWith('/status-wartel')) return 'Status Wartel Lapas';
     if (location.pathname.startsWith('/riwayat')) return 'Rekap & Riwayat Transaksi';
+    if (location.pathname.startsWith('/top-up-saldo')) return 'Top Up Saldo Kantin';
     if (location.pathname.startsWith('/struk')) return 'Struk Bukti Transaksi';
     if (location.pathname.startsWith('/voucher')) return 'Voucher Transaksi';
     return 'PasCall Kantin';
@@ -43,10 +45,16 @@ export default function AppLayout() {
       label: 'Riwayat',
       icon: History,
     },
+    {
+      to: '/top-up-saldo',
+      label: 'Top Up Saldo',
+      icon: Wallet,
+    },
   ];
 
   return (
     <div className="min-h-screen bg-[#F5F7FA] flex flex-col md:flex-row text-[#1E293B]">
+
       {/* SIDEBAR DESKTOP / TABLET (Hidden on Mobile) */}
       <aside className="no-print hidden md:flex flex-col w-64 bg-white border-r border-[#E2E8F0] shrink-0 sticky top-0 h-screen z-30">
         {/* Logo Header */}
@@ -107,6 +115,14 @@ export default function AppLayout() {
               Ketersediaan Unit
             </div>
             <WartelBadgeSidebar />
+          </div>
+
+          {/* Kartu Saldo Kantin di bawah Ketersediaan Unit */}
+          <div className="pt-2 px-1">
+            <div className="px-2 pb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              Saldo Kantin
+            </div>
+            <SaldoBadgeSidebar />
           </div>
         </nav>
 
@@ -220,3 +236,5 @@ export default function AppLayout() {
     </div>
   );
 }
+
+
